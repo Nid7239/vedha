@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="register.css">
+
+  <section id="register" tabindex="0">
+    <h2 data-tts="Register for Inclusive Education Platform">Register</h2>
+    <form id="registration-form">
+      <label for="name" data-tts="Enter your name">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+
+      <label for="email" data-tts="Enter your email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+      <label for="phone" data-tts="Enter your phone number">PHONE NO:</label>
+      <input type="tel" id="tel" name="tel" placeholder="Enter your phone number" required />
+
+      <label for="role" data-tts="Select your role">Role:</label>
+      <select id="role" name="role" required>
+        <option value="blind" data-tts="Visually impaired">Visually Impaired</option>
+        <option value="deaf" data-tts="Hearing impaired">Hearing Impaired</option>
+        <option value="autism" data-tts="Autistic">Autistic</option>
+      </select>
+
+      <button type="submit" data-tts="Submit your registration">Submit</button>
+    </form>
+  </section>
+  
+  <script>
+    // Initialize SpeechSynthesis
+    const synth = window.speechSynthesis;
+
+    
+    function speakText(text) {
+      if (synth.speaking) synth.cancel(); // Stop ongoing speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1; // Adjust speech rate
+      synth.speak(utterance);
+    }
+
+    
+    document.querySelectorAll("[data-tts]").forEach(element => {
+      element.addEventListener("click", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+      element.addEventListener("focus", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+    });
+  </script>
+
+</body>
+</html>

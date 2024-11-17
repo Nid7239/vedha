@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIN</title>
+ <link rel= "stylesheet" href="vs.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="login-form">
+      <!-- Email Field -->
+      <label for="email" data-tts="Enter your email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" data-tts="Type your email here" required>
+
+      <!-- Password Field -->
+      <label for="password" data-tts="Enter your password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" data-tts="Type your password here" required>
+
+      <!-- Login Button -->
+      <button type="button" id="login-button" data-tts="Click to log in">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="register.html" data-tts="Click here to register">Register here</a></p>
+  </div>
+
+  <!-- JavaScript for Text-to-Speech -->
+  <script>
+    // Initialize SpeechSynthesis
+    const synth = window.speechSynthesis;
+
+    // Function to speak text
+    function speakText(text) {
+      if (synth.speaking) synth.cancel(); // Stop ongoing speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1; // Normal speaking rate
+      synth.speak(utterance);
+    }
+
+    // Add event listeners to all elements with "data-tts" attribute
+    document.querySelectorAll('[data-tts]').forEach(element => {
+      // Speak on focus (keyboard users)
+      element.addEventListener('focus', () => {
+        speakText(element.getAttribute('data-tts'));
+      });
+
+      // Speak on click (mouse users)
+      element.addEventListener('click', () => {
+        speakText(element.getAttribute('data-tts'));
+      });
+    });
+
+    // Optional: Add a focus event to the form itself for a welcoming message
+    document.getElementById('login-form').addEventListener('focus', () => {
+      speakText('Welcome to the login form. Please enter your details to continue.');
+    }, { once: true });
+  </script>
+</body>
+</html>

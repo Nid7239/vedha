@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inclusive Education Platform with Text-to-Speech for accessibility">
+  <title>EDUBRIDGE - Inclusive Education Platform</title>
+  <link rel="stylesheet" href="vedha.css">
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      color: #333;
+      background: url(C:\Users\admin\Desktop\images\home.jpg);no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <center><h1>EDUBRIDGE</h1></center>
+  </header>
+
+  <nav class="navbar" aria-label="Main Navigation">
+    <ul>
+      <li><a href="vs.html" data-tts="Navigate to Login Page">Login Page</a></li>
+      
+    </ul>
+  </nav>
+
+
+</section>
+  <main class="container">
+    <section id="about" tabindex="0">
+      <h2 data-tts="About Us">About Us</h2>
+      <p data-tts="Our platform ensures equal learning opportunities for everyone, including those with visual, hearing, or speech impairments.">
+        Our platform ensures equal learning opportunities for everyone, including those with visual, hearing, or speech impairments.
+      </p>
+    </section>
+
+    <section id="features" tabindex="0">
+      <h2 data-tts="Features">Features</h2>
+      <ul>
+        <li data-tts="Screen reader-friendly navigation">Screen reader-friendly navigation</li>
+        <li data-tts="Text-to-speech tools">Text-to-speech tools</li>
+        <li data-tts="Keyboard-accessible interface">Keyboard-accessible interface</li>
+        <li data-tts="Alt text for images">Alt text for images</li>
+      </ul>
+    </section>
+
+    <section id="gallery" tabindex="0">
+      <h2 data-tts="Gallery">Gallery</h2>
+      <div class="image-container">
+        <img src="blind person.jpg" alt="Blind student learning with Braille and a teacher guiding them" width="200" height="200" data-tts="Blind student learning with Braille and a teacher guiding them">
+        <img src="sign person.jpg" alt="Students using sign language for communication" width="200" height="200" data-tts="Students using sign language for communication">
+        <img src="autism.jpg" alt="Student watching visual video classes" width="200" height="200" data-tts="Student watching visual video classes">
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p data-tts="Copyright 2024 Inclusive Education Platform.">© 2024 Inclusive Education Platform. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Text-to-Speech -->
+  <script>
+    const synth = window.speechSynthesis;
+
+    function speakText(text) {
+      if (synth.speaking) synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1; // Adjust speech rate
+      synth.speak(utterance);
+    }
+
+    document.querySelectorAll("[data-tts]").forEach(element => {
+      element.addEventListener("click", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+      element.addEventListener("focus", () => {
+        const text = element.getAttribute("data-tts");
+        speakText(text);
+      });
+    });
+  </script>
+</body>
+</html>
